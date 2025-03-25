@@ -24,8 +24,8 @@ export const siteConfig = {
   // Horaires d'ouverture
   openingHours: {
     weekdays: "6h30 - 19h00",
-    saturday: "6h30 - 19h00",
-    sunday: "6h30 - 19h00",
+    saturday: "6h30 - 12h30",
+    sunday: "Fermé",
     holidays: "Fermé",
   },
   
