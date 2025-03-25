@@ -11,6 +11,13 @@ const HeroSection = () => {
     ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))' 
     : 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7))';
 
+  const scrollToHistory = () => {
+    const historySection = document.getElementById('notre-histoire');
+    if (historySection) {
+      historySection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section 
       id="hero" 
@@ -30,7 +37,10 @@ const HeroSection = () => {
           <br />
           {siteConfig.description}
         </p>
-        <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-600/20">
+        <button 
+          onClick={scrollToHistory}
+          className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-600/20"
+        >
           Découvrir
         </button>
       </div>

@@ -30,13 +30,6 @@ const galleryItems: GalleryItem[] = [
     height: 1707,
   },
   {
-    id: 3,
-    src: "/gallery/2-Actu - Aux saveurs retrouvées.png",
-    alt: "Aux saveurs retrouvées",
-    width: 1080,
-    height: 720,
-  },
-  {
     id: 4,
     src: "/gallery/10351.jpg",
     alt: "Pains artisanaux",

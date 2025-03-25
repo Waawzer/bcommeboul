@@ -1,16 +1,17 @@
 export const siteConfig = {
   // Informations générales
   name: "Pains Bons",
-  slogan: "L'authenticité du pain artisanal, façonné avec passion et tradition depuis 1987.",
-  description: "Des saveurs d'antan pour le plaisir d'aujourd'hui.",
+  slogan: "L'Art du Pain Traditionnel",
+  description: "Boulangerie artisanale depuis 1987",
   
   // Informations sur le fondateur
-  foundingYear: "1987",
+  foundingYear: 1987,
   founderName: "Dupont",
+  founderStory: "Une passion transmise de génération en génération",
   
   // Coordonnées
   address: {
-    street: "123 Rue du Pain",
+    street: "12 rue de la Boulangerie",
     city: "Paris",
     postalCode: "75001",
     country: "France",
@@ -24,7 +25,7 @@ export const siteConfig = {
   openingHours: {
     weekdays: "7h00 - 19h30",
     saturday: "7h00 - 20h00",
-    sunday: "7h30 - 13h00",
+    sunday: "7h00 - 13h00",
     holidays: "Fermé",
   },
   
@@ -32,13 +33,12 @@ export const siteConfig = {
   social: {
     facebook: "https://facebook.com/painsbons",
     instagram: "https://instagram.com/painsbons",
-    twitter: "https://twitter.com/painsbons",
   },
   
   // SEO
   seo: {
-    keywords: "boulangerie, pain artisanal, baguette, viennoiserie, pâtisserie, tradition, artisanal",
-    locale: "fr_FR",
-    url: "https://painsbons.fr",
+    title: "Pains Bons - Boulangerie Artisanale à Paris",
+    description: "Découvrez notre sélection de pains et pâtisseries faits maison selon les traditions boulangères françaises.",
+    keywords: ["boulangerie", "pain", "artisanal", "paris", "pâtisserie", "tradition", "fait maison"],
   }
 }; 
