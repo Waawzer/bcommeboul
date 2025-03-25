@@ -1,0 +1,8 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#18181b"/>
+  <g>
+    <rect stroke="#d97706" stroke-width="5" fill="none" x="250" y="150" width="300" height="300" rx="10"/>
+    <text font-family="Arial" font-size="22" font-weight="bold" fill="#d97706" x="400" y="310" text-anchor="middle">Image</text>
+    <text font-family="Arial" font-size="18" fill="#d97706" x="400" y="340" text-anchor="middle">Pains Bons</text>
+  </g>
+</svg> 
