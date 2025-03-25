@@ -25,6 +25,11 @@ const Header = () => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
+    // Vérifier la position initiale au chargement
+    if (window.scrollY > 10) {
+      setIsScrolled(true);
+    }
+    
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true);
@@ -51,6 +56,11 @@ const Header = () => {
   const linkClass = theme === 'dark' || !isScrolled
     ? 'text-white hover:text-amber-500'
     : 'text-gray-700 hover:text-amber-600';
+
+  // Couleur des icônes du menu selon le contexte
+  const menuIconColor = theme === 'dark' || !isScrolled 
+    ? "text-white" 
+    : "text-gray-700";
 
   return (
     <header 
@@ -92,7 +102,7 @@ const Header = () => {
 
           <div className="block md:hidden ml-4">
             <button 
-              className={theme === 'dark' || !isScrolled ? "text-white p-2" : "text-gray-700 p-2"}
+              className={`${menuIconColor} p-2`}
               onClick={toggleMobileMenu}
               aria-label="Menu mobile"
             >
@@ -104,12 +114,18 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Menu mobile */}
+      {/* Menu mobile - maintenant toujours visible et z-index supérieur */}
       {mobileMenuOpen && (
         <div 
-          className={`fixed inset-0 z-40 md:hidden ${
-            theme === 'dark' ? 'bg-black/95' : 'bg-gray-900/95'
-          }`}
+          className="fixed inset-0 z-50 bg-black/95"
+          style={{
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            display: 'block',
+            position: 'fixed'
+          }}
         >
           <div className="relative h-full">
             {/* Bouton fermeture */}
@@ -142,7 +158,7 @@ const Header = () => {
                       <li key={item}>
                         <Link 
                           href={`#${item.toLowerCase().replace(' ', '-')}`}
-                          className="text-white text-2xl font-medium block py-3 border-b border-amber-500/30 hover:text-amber-500 transition-colors"
+                          className="text-white text-2xl font-medium block py-3 border-b border-amber-500/30 hover:text-amber-500 transition-colors text-center"
                           onClick={toggleMobileMenu}
                         >
                           {item}
