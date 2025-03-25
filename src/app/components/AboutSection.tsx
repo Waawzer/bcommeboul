@@ -3,11 +3,13 @@
 import React, { useEffect, useRef } from 'react';
 import ImageFallback from './ImageFallback';
 import { siteConfig } from '@/config/site';
+import { useTheme } from '@/context/ThemeContext';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,7 +18,7 @@ const AboutSection = () => {
       const sectionTop = sectionRef.current.getBoundingClientRect().top;
       const windowHeight = window.innerHeight;
       
-      // Parallax effect when section is in view
+      // Parallaxe effect when section is in view
       if (sectionTop < windowHeight && sectionTop > -windowHeight) {
         const scrollProgress = 1 - (sectionTop / windowHeight);
         
@@ -35,6 +37,19 @@ const AboutSection = () => {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Classes CSS adaptées au thème
+  const headingClass = theme === 'dark' 
+    ? 'text-amber-400' 
+    : 'text-amber-700';
+  
+  const textClass = theme === 'dark' 
+    ? 'text-gray-300' 
+    : 'text-gray-700';
+  
+  const highlightClass = theme === 'dark'
+    ? 'text-gray-200'
+    : 'text-gray-800';
 
   return (
     <section 
@@ -66,27 +81,27 @@ const AboutSection = () => {
             ref={textRef}
             className="transition-all duration-700 opacity-0"
           >
-            <h3 className="text-2xl font-semibold text-amber-400 mb-4">
+            <h3 className={`text-2xl font-semibold ${headingClass} mb-4`}>
               Une passion familiale depuis {siteConfig.foundingYear}
             </h3>
-            <p className="text-gray-300 mb-4 leading-relaxed">
+            <p className={`${textClass} mb-4 leading-relaxed`}>
               Fondée par la famille {siteConfig.founderName} il y a plus de trois décennies, notre boulangerie a toujours été guidée par une passion profonde pour le pain artisanal et les traditions boulangères françaises.
             </p>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className={`${textClass} mb-6 leading-relaxed`}>
               De père en fils, nous transmettons nos secrets de fabrication et notre savoir-faire unique qui donne à nos pains leur saveur inimitable. Chaque matin, nos artisans boulangers se lèvent avant l&apos;aube pour pétrir, façonner et cuire des pains d&apos;exception.
             </p>
             <div className="flex flex-col space-y-3">
               <div className="flex items-center">
                 <span className="w-2 h-2 bg-amber-500 rounded-full mr-3"></span>
-                <p className="text-gray-200">Ingrédients 100% naturels</p>
+                <p className={highlightClass}>Ingrédients 100% naturels</p>
               </div>
               <div className="flex items-center">
                 <span className="w-2 h-2 bg-amber-500 rounded-full mr-3"></span>
-                <p className="text-gray-200">Farines sélectionnées localement</p>
+                <p className={highlightClass}>Farines sélectionnées localement</p>
               </div>
               <div className="flex items-center">
                 <span className="w-2 h-2 bg-amber-500 rounded-full mr-3"></span>
-                <p className="text-gray-200">Techniques ancestrales préservées</p>
+                <p className={highlightClass}>Techniques ancestrales préservées</p>
               </div>
             </div>
           </div>

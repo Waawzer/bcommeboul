@@ -2,8 +2,32 @@
 
 import React from 'react';
 import { siteConfig } from '@/config/site';
+import { useTheme } from '@/context/ThemeContext';
 
 const ContactSection = () => {
+  const { theme } = useTheme();
+
+  // Classes CSS adaptées au thème
+  const headingClass = theme === 'dark' 
+    ? 'text-amber-400' 
+    : 'text-amber-700';
+  
+  const textClass = theme === 'dark' 
+    ? 'text-gray-400' 
+    : 'text-gray-600';
+  
+  const labelClass = theme === 'dark'
+    ? 'text-white'
+    : 'text-gray-800';
+  
+  const hoursLabelClass = theme === 'dark'
+    ? 'text-gray-300'
+    : 'text-gray-700';
+  
+  const hoursValueClass = theme === 'dark'
+    ? 'text-white'
+    : 'text-gray-900';
+
   return (
     <section id="contact" className="py-24 bg-zinc-800">
       <div className="container mx-auto px-4">
@@ -27,9 +51,9 @@ const ContactSection = () => {
           </div>
           
           {/* Informations de contact */}
-          <div className="bg-zinc-900 rounded-lg p-8 shadow-lg flex flex-col justify-between">
+          <div className={`${theme === 'dark' ? 'bg-zinc-900' : 'bg-white'} rounded-lg p-8 shadow-lg flex flex-col justify-between`}>
             <div>
-              <h3 className="text-2xl font-semibold text-amber-400 mb-6">Retrouvez-nous</h3>
+              <h3 className={`text-2xl font-semibold ${headingClass} mb-6`}>Retrouvez-nous</h3>
               
               <div className="space-y-6">
                 {/* Adresse */}
@@ -41,9 +65,9 @@ const ContactSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-white font-medium mb-1">Adresse</h4>
-                    <p className="text-gray-400">{siteConfig.address.street}</p>
-                    <p className="text-gray-400">{siteConfig.address.postalCode} {siteConfig.address.city}, {siteConfig.address.country}</p>
+                    <h4 className={`font-medium mb-1 ${labelClass}`}>Adresse</h4>
+                    <p className={textClass}>{siteConfig.address.street}</p>
+                    <p className={textClass}>{siteConfig.address.postalCode} {siteConfig.address.city}, {siteConfig.address.country}</p>
                   </div>
                 </div>
                 
@@ -55,8 +79,8 @@ const ContactSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-white font-medium mb-1">Téléphone</h4>
-                    <p className="text-gray-400">{siteConfig.contact.phone}</p>
+                    <h4 className={`font-medium mb-1 ${labelClass}`}>Téléphone</h4>
+                    <p className={textClass}>{siteConfig.contact.phone}</p>
                   </div>
                 </div>
                 
@@ -68,8 +92,8 @@ const ContactSection = () => {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-white font-medium mb-1">Email</h4>
-                    <p className="text-gray-400">{siteConfig.contact.email}</p>
+                    <h4 className={`font-medium mb-1 ${labelClass}`}>Email</h4>
+                    <p className={textClass}>{siteConfig.contact.email}</p>
                   </div>
                 </div>
               </div>
@@ -77,23 +101,23 @@ const ContactSection = () => {
             
             {/* Horaires d'ouverture */}
             <div className="mt-10">
-              <h4 className="text-xl font-semibold text-amber-400 mb-4">Horaires d&apos;ouverture</h4>
+              <h4 className={`text-xl font-semibold ${headingClass} mb-4`}>Horaires d&apos;ouverture</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-300">Lundi - Vendredi</span>
-                  <span className="text-white">{siteConfig.openingHours.weekdays}</span>
+                  <span className={hoursLabelClass}>Lundi - Vendredi</span>
+                  <span className={hoursValueClass}>{siteConfig.openingHours.weekdays}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-300">Samedi</span>
-                  <span className="text-white">{siteConfig.openingHours.saturday}</span>
+                  <span className={hoursLabelClass}>Samedi</span>
+                  <span className={hoursValueClass}>{siteConfig.openingHours.saturday}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-300">Dimanche</span>
-                  <span className="text-white">{siteConfig.openingHours.sunday}</span>
+                  <span className={hoursLabelClass}>Dimanche</span>
+                  <span className={hoursValueClass}>{siteConfig.openingHours.sunday}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-300">Jours fériés</span>
-                  <span className="text-white">{siteConfig.openingHours.holidays}</span>
+                  <span className={hoursLabelClass}>Jours fériés</span>
+                  <span className={hoursValueClass}>{siteConfig.openingHours.holidays}</span>
                 </div>
               </div>
             </div>

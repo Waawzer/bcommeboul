@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import ImageFallback from './ImageFallback';
+import { useTheme } from '@/context/ThemeContext';
 
 // Définition du type pour les produits
 type Product = {
@@ -57,33 +58,13 @@ const products: Product[] = [
     category: 'viennoiseries',
   },
   {
-    id: 7,
-    name: 'Chausson aux Pommes',
-    description: 'Garni de compote de pommes maison subtilement vanillée.',
-    image: '/products/chausson-pommes.jpg',
-    category: 'viennoiseries',
-  },
-  {
-    id: 8,
-    name: 'Tarte aux Fruits',
-    description: 'Pâte sablée, crème pâtissière et fruits frais de saison.',
-    image: '/products/tarte-fruits.jpg',
-    category: 'patisseries',
-  },
-  {
     id: 9,
     name: 'Éclair au Chocolat',
     description: 'Pâte à choux, crème pâtissière au chocolat et glaçage intense.',
     image: '/products/eclair.jpg',
     category: 'patisseries',
   },
-  {
-    id: 10,
-    name: 'Fougasse aux Olives',
-    description: 'Pain méditerranéen parfumé aux olives et herbes de Provence.',
-    image: '/products/fougasse.jpg',
-    category: 'specialites',
-  },
+
 ];
 
 // Catégories disponibles
@@ -96,6 +77,7 @@ const categories = [
 ];
 
 const ProductsSection = () => {
+  const { theme } = useTheme();
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -103,6 +85,23 @@ const ProductsSection = () => {
   const filteredProducts = activeCategory === 'all' 
     ? products 
     : products.filter(product => product.category === activeCategory);
+
+  // Classes CSS adaptées au thème
+  const cardClass = theme === 'dark' 
+    ? 'bg-zinc-900' 
+    : 'bg-white shadow-md';
+  
+  const textClass = theme === 'dark' 
+    ? 'text-gray-400' 
+    : 'text-gray-700';
+  
+  const headingClass = theme === 'dark'
+    ? 'text-amber-400'
+    : 'text-amber-700';
+  
+  const buttonClass = theme === 'dark'
+    ? 'text-amber-500 hover:text-amber-400'
+    : 'text-amber-700 hover:text-amber-600';
 
   return (
     <section id="nos-produits" className="py-24 bg-zinc-800">
@@ -120,7 +119,7 @@ const ProductsSection = () => {
               className={`px-5 py-2 rounded-full text-sm md:text-base transition-all duration-300 ${
                 activeCategory === category.id
                   ? 'bg-amber-600 text-white' 
-                  : 'bg-zinc-700 text-gray-300 hover:bg-zinc-600'
+                  : `${theme === 'dark' ? 'bg-zinc-700 text-gray-300 hover:bg-zinc-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`
               }`}
             >
               {category.name}
@@ -133,7 +132,7 @@ const ProductsSection = () => {
           {filteredProducts.map(product => (
             <div 
               key={product.id}
-              className="bg-zinc-900 rounded-lg overflow-hidden shadow-xl transform transition-all duration-300 hover:scale-105 hover:shadow-amber-600/10"
+              className={`${cardClass} rounded-lg overflow-hidden shadow-xl transform transition-all duration-300 hover:scale-105 hover:shadow-amber-600/10`}
               onClick={() => setSelectedProduct(product)}
             >
               <div className="relative h-64">
@@ -146,9 +145,9 @@ const ProductsSection = () => {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-amber-400 mb-2">{product.name}</h3>
-                <p className="text-gray-400">{product.description}</p>
-                <button className="mt-4 text-amber-500 font-medium text-sm hover:text-amber-400 transition-colors">
+                <h3 className={`text-xl font-semibold ${headingClass} mb-2`}>{product.name}</h3>
+                <p className={textClass}>{product.description}</p>
+                <button className={`mt-4 font-medium text-sm ${buttonClass} transition-colors`}>
                   Voir plus →
                 </button>
               </div>
@@ -159,7 +158,7 @@ const ProductsSection = () => {
         {/* Modal pour afficher le détail du produit */}
         {selectedProduct && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-            <div className="bg-zinc-900 rounded-lg max-w-2xl w-full overflow-hidden relative">
+            <div className={`${cardClass} rounded-lg max-w-2xl w-full overflow-hidden relative`}>
               <button 
                 className="absolute top-4 right-4 text-white hover:text-amber-500 z-10"
                 onClick={() => setSelectedProduct(null)}
@@ -180,10 +179,12 @@ const ProductsSection = () => {
               </div>
               
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-amber-500 mb-4">{selectedProduct.name}</h3>
-                <p className="text-gray-300 mb-6">{selectedProduct.description}</p>
-                <div className="text-amber-600 text-sm uppercase tracking-wider font-medium">
-                  Catégorie: {categories.find(c => c.id === selectedProduct.category)?.name}
+                <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-amber-500' : 'text-amber-700'} mb-4`}>{selectedProduct.name}</h3>
+                <p className={theme === 'dark' ? 'text-gray-300 mb-6' : 'text-gray-700 mb-6'}>{selectedProduct.description}</p>
+                <div className={theme === 'dark' ? 'text-amber-600' : 'text-amber-800'}>
+                  <span className="text-sm uppercase tracking-wider font-medium">
+                    Catégorie: {categories.find(c => c.id === selectedProduct.category)?.name}
+                  </span>
                 </div>
               </div>
             </div>

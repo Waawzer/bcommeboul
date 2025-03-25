@@ -3,12 +3,22 @@
 import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
+import { useTheme } from '@/context/ThemeContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
+  
+  // Classes CSS adaptées au thème
+  const footerBg = theme === 'dark' ? 'bg-black' : 'bg-zinc-900';
+  const textMuted = theme === 'dark' ? 'text-gray-400' : 'text-gray-300';
+  const textHover = theme === 'dark' ? 'hover:text-amber-500' : 'hover:text-amber-400';
+  const headingClass = theme === 'dark' ? 'text-white' : 'text-gray-100';
+  const borderColor = theme === 'dark' ? 'border-zinc-800' : 'border-zinc-700';
+  const copyrightClass = theme === 'dark' ? 'text-gray-500' : 'text-gray-400';
   
   return (
-    <footer className="bg-black py-12">
+    <footer className={`${footerBg} py-12`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo et description */}
@@ -16,7 +26,7 @@ const Footer = () => {
             <Link href="/" className="text-2xl font-bold text-amber-500 mb-4 inline-block">
               {siteConfig.name}
             </Link>
-            <p className="text-gray-400 mt-4 max-w-md">
+            <p className={`${textMuted} mt-4 max-w-md`}>
               {siteConfig.slogan}
               <br />
               {siteConfig.description}
@@ -25,13 +35,13 @@ const Footer = () => {
           
           {/* Liens rapides */}
           <div>
-            <h3 className="text-white font-semibold mb-4 text-lg">Liens rapides</h3>
+            <h3 className={`${headingClass} font-semibold mb-4 text-lg`}>Liens rapides</h3>
             <ul className="space-y-2">
               {['Notre Histoire', 'Nos Produits', 'Galerie', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link 
                     href={`#${item.toLowerCase().replace(' ', '-')}`}
-                    className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                    className={`${textMuted} ${textHover} transition-colors duration-300`}
                   >
                     {item}
                   </Link>
@@ -42,7 +52,7 @@ const Footer = () => {
           
           {/* Mentions légales */}
           <div>
-            <h3 className="text-white font-semibold mb-4 text-lg">Mentions légales</h3>
+            <h3 className={`${headingClass} font-semibold mb-4 text-lg`}>Mentions légales</h3>
             <ul className="space-y-2">
               {[
                 { name: 'CGV', path: '/cgv' },
@@ -53,7 +63,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link 
                     href={item.path}
-                    className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                    className={`${textMuted} ${textHover} transition-colors duration-300`}
                   >
                     {item.name}
                   </Link>
@@ -76,7 +86,7 @@ const Footer = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-zinc-800 hover:bg-amber-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300"
+                className={`${theme === 'dark' ? 'bg-zinc-800 hover:bg-amber-600' : 'bg-zinc-700 hover:bg-amber-500'} w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300`}
               >
                 <span className="sr-only">{social.icon}</span>
                 {social.icon === 'facebook' && (
@@ -100,10 +110,10 @@ const Footer = () => {
         </div>
         
         {/* Ligne de séparation */}
-        <div className="border-t border-zinc-800 my-8"></div>
+        <div className={`border-t ${borderColor} my-8`}></div>
         
         {/* Copyright */}
-        <div className="text-center text-gray-500 text-sm">
+        <div className={`text-center ${copyrightClass} text-sm`}>
           © {currentYear} {siteConfig.name}. Tous droits réservés.
         </div>
       </div>

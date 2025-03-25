@@ -2,23 +2,30 @@
 
 import React from 'react';
 import { siteConfig } from '@/config/site';
+import { useTheme } from '@/context/ThemeContext';
 
 const HeroSection = () => {
+  const { theme } = useTheme();
+  
+  const overlayGradient = theme === 'dark' 
+    ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))' 
+    : 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7))';
+
   return (
     <section 
       id="hero" 
       className="relative h-screen flex items-center justify-center"
       style={{
-        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/wheat-field.jpg")',
+        backgroundImage: `${overlayGradient}, url("/wheat-field.jpg")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
       <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-amber-500 mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-amber-500 mb-4 tracking-tight text-shadow">
           {siteConfig.name}
         </h1>
-        <p className="text-lg md:text-xl text-white max-w-2xl mx-auto mb-8 leading-relaxed">
+        <p className="text-lg md:text-xl text-white max-w-2xl mx-auto mb-8 leading-relaxed text-shadow">
           {siteConfig.slogan}
           <br />
           {siteConfig.description}

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Thème sombre (par défaut) */
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -9,6 +10,30 @@
   --secondary: #18181b; /* zinc-900 */
   --secondary-light: #27272a; /* zinc-800 */
   --secondary-dark: #09090b; /* zinc-950 */
+  --card-bg: #18181b; /* zinc-900 */
+  --card-highlight: #27272a; /* zinc-800 */
+  --text-muted: #a1a1aa; /* zinc-400 */
+  --text-light: #ffffff;
+  --text-primary: #f59e0b; /* amber-500 */
+  --text-primary-dark: #b45309; /* amber-700 */
+}
+
+/* Thème clair */
+html.light-theme {
+  --background: #f5f5f5;
+  --foreground: #27272a; /* Gris plus foncé pour meilleure lisibilité */
+  --primary: #b45309; /* amber-700 - Plus foncé pour meilleur contraste */
+  --primary-light: #d97706; /* amber-600 - Plus foncé pour meilleur contraste */
+  --primary-dark: #92400e; /* amber-800 - Plus foncé pour meilleur contraste */
+  --secondary: #f8fafc; /* slate-50 */
+  --secondary-light: #f1f5f9; /* slate-100 */
+  --secondary-dark: #e2e8f0; /* slate-200 */
+  --card-bg: #ffffff;
+  --card-highlight: #f8fafc;
+  --text-muted: #4b5563; /* gray-600 - Plus foncé pour meilleure lisibilité */
+  --text-light: #ffffff;
+  --text-primary: #b45309; /* amber-700 */
+  --text-primary-dark: #92400e; /* amber-800 */
 }
 
 @theme inline {
@@ -29,6 +54,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
@@ -102,6 +128,7 @@ html {
 section {
   position: relative;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 /* Animation pour les titres de section */
@@ -149,4 +176,92 @@ a {
 .hover-underline-animation:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+/* Thème spécifique pour les sections */
+html:not(.light-theme) .bg-zinc-800 {
+  background-color: var(--secondary-light);
+}
+
+html:not(.light-theme) .bg-zinc-900 {
+  background-color: var(--secondary);
+}
+
+html:not(.light-theme) .bg-black {
+  background-color: var(--secondary-dark);
+}
+
+html.light-theme .bg-zinc-800 {
+  background-color: var(--secondary-light);
+}
+
+html.light-theme .bg-zinc-900 {
+  background-color: var(--secondary);
+}
+
+html.light-theme .bg-black {
+  background-color: var(--secondary-dark);
+}
+
+/* Styles pour le basculement du thème */
+.theme-toggle-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  color: var(--foreground);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+html.light-theme .theme-toggle-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-icon {
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon {
+  transform: rotate(30deg);
+}
+
+/* Classes spécifiques au thème */
+.text-amber-500 {
+  color: var(--text-primary);
+}
+
+.text-amber-600 {
+  color: var(--text-primary-dark);
+}
+
+.text-amber-400 {
+  color: var(--primary);
+}
+
+html.light-theme .text-white {
+  color: var(--text-light);
+}
+
+html.light-theme .text-gray-400,
+html.light-theme .text-gray-300,
+html.light-theme .text-gray-200 {
+  color: var(--text-muted);
+}
+
+/* Ombre de texte pour améliorer la lisibilité sur fonds d'image */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+html.light-theme .text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
 }
