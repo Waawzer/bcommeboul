@@ -22,9 +22,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${siteConfig.name} | Boulangerie artisanale`,
     description: `${siteConfig.slogan} ${siteConfig.description}`,
-    url: siteConfig.seo.url,
     siteName: siteConfig.name,
-    locale: siteConfig.seo.locale,
+    locale: "fr_FR",
     type: "website",
   },
 };
