@@ -52,10 +52,6 @@ const Header = () => {
     ? 'text-white hover:text-amber-500'
     : 'text-gray-700 hover:text-amber-600';
 
-  const mobileMenuBg = 'bg-black/95'; // Toujours sombre pour meilleure lisibilité
-
-  const mobileLinkClass = 'text-white hover:text-amber-500'; // Toujours clair pour meilleure visibilité
-
   return (
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
