@@ -29,7 +29,13 @@ const galleryItems: GalleryItem[] = [
     width: 2560,
     height: 1707,
   },
-  
+  {
+    id: 3,
+    src: "/gallery/2-Actu - Aux saveurs retrouvées.png",
+    alt: "Aux saveurs retrouvées",
+    width: 1080,
+    height: 720,
+  },
   {
     id: 4,
     src: "/gallery/10351.jpg",
@@ -93,10 +99,6 @@ const GallerySection = () => {
   const { theme } = useTheme();
 
   // Classes adaptées au thème
-  const overlayClass = theme === 'dark' 
-    ? 'bg-black/60' 
-    : 'bg-black/50';
-  
   const cardClass = theme === 'dark'
     ? 'bg-zinc-900'
     : 'bg-white';
