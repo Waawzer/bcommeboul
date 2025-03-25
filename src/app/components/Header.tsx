@@ -65,6 +65,23 @@ const Header = () => {
     ? 'text-white'
     : 'text-gray-700';
 
+  // Styles conditionnels pour le menu mobile
+  const mobileMenuBg = theme === 'dark' 
+    ? 'bg-black' 
+    : 'bg-white';
+  
+  const mobileMenuText = theme === 'dark' 
+    ? 'text-white' 
+    : 'text-gray-800';
+  
+  const mobileMenuBorder = theme === 'dark' 
+    ? 'border-amber-500/20' 
+    : 'border-amber-600/20';
+  
+  const mobileMenuLink = theme === 'dark' 
+    ? 'text-white hover:text-amber-500' 
+    : 'text-gray-800 hover:text-amber-600';
+
   return (
     <>
       {/* Header principal */}
@@ -123,10 +140,10 @@ const Header = () => {
 
       {/* Menu mobile - complètement séparé du header */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black z-[9999] md:hidden">
+        <div className={`fixed inset-0 ${mobileMenuBg} z-[9999] md:hidden`}>
           <div className="w-full h-full flex flex-col">
             {/* Entête du menu mobile */}
-            <div className="flex justify-between items-center px-5 py-4 border-b border-amber-500/20">
+            <div className={`flex justify-between items-center px-5 py-4 border-b ${mobileMenuBorder}`}>
               <div className="flex items-center">
                 <Image 
                   src="/logo.png" 
@@ -154,10 +171,10 @@ const Header = () => {
               <nav className="w-full max-w-xs">
                 <ul className="space-y-6">
                   {['Notre Histoire', 'Galerie', 'Contact'].map((item) => (
-                    <li key={item} className="border-b border-amber-500/20 pb-2">
+                    <li key={item} className={`border-b ${mobileMenuBorder} pb-2`}>
                       <Link 
                         href={`#${item.toLowerCase().replace(' ', '-')}`}
-                        className="text-white text-2xl font-medium block py-3 text-center hover:text-amber-500 transition-colors"
+                        className={`${mobileMenuLink} text-2xl font-medium block py-3 text-center transition-colors`}
                         onClick={toggleMobileMenu}
                       >
                         {item}
@@ -169,9 +186,9 @@ const Header = () => {
             </div>
             
             {/* Pied de page du menu mobile */}
-            <div className="px-5 py-5 border-t border-amber-500/20 flex justify-center">
+            <div className={`px-5 py-5 border-t ${mobileMenuBorder} flex justify-center`}>
               <div className="flex items-center space-x-3">
-                <span className="text-white">Changer de thème:</span>
+                <span className={mobileMenuText}>Changer de thème:</span>
                 <ThemeToggle />
               </div>
             </div>
