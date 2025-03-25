@@ -12,6 +12,18 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme } = useTheme();
 
+  // Empêcher le défilement quand le menu mobile est ouvert
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -40,13 +52,9 @@ const Header = () => {
     ? 'text-white hover:text-amber-500'
     : 'text-gray-700 hover:text-amber-600';
 
-  const mobileMenuBg = theme === 'dark'
-    ? 'bg-black/95'
-    : 'bg-white/95';
+  const mobileMenuBg = 'bg-black/95'; // Toujours sombre pour meilleure lisibilité
 
-  const mobileLinkClass = theme === 'dark'
-    ? 'text-white hover:text-amber-500'
-    : 'text-gray-800 hover:text-amber-600';
+  const mobileLinkClass = 'text-white hover:text-amber-500'; // Toujours clair pour meilleure visibilité
 
   return (
     <header 
@@ -102,8 +110,8 @@ const Header = () => {
 
       {/* Menu mobile */}
       {mobileMenuOpen && (
-        <div className={`md:hidden fixed inset-0 z-40 ${mobileMenuBg} pt-24`}>
-          <div className="container mx-auto px-4">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/95">
+          <div className="container mx-auto px-6">
             <button 
               className="absolute top-5 right-5 text-amber-500 p-2" 
               onClick={toggleMobileMenu}
@@ -114,28 +122,30 @@ const Header = () => {
               </svg>
             </button>
 
-            <ul className="flex flex-col space-y-6 items-center">
-              {['Notre Histoire', 'Galerie', 'Contact'].map((item) => (
-                <li key={item} className="w-full">
-                  <Link 
-                    href={`#${item.toLowerCase().replace(' ', '-')}`}
-                    className={`${mobileLinkClass} text-xl font-medium block text-center py-3 border-b border-gray-700/20`}
-                    onClick={toggleMobileMenu}
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="flex flex-col items-center">
+              <div className="mb-10 flex justify-center">
+                <Image 
+                  src="/logo.png" 
+                  alt={siteConfig.name} 
+                  width={80} 
+                  height={80}
+                  className="opacity-90"
+                />
+              </div>
 
-            <div className="mt-10 flex justify-center">
-              <Image 
-                src="/logo.png" 
-                alt={siteConfig.name} 
-                width={80} 
-                height={80}
-                className="opacity-80"
-              />
+              <ul className="w-full max-w-xs space-y-6">
+                {['Notre Histoire', 'Galerie', 'Contact'].map((item) => (
+                  <li key={item} className="w-full text-center">
+                    <Link 
+                      href={`#${item.toLowerCase().replace(' ', '-')}`}
+                      className="text-white text-2xl font-medium block py-4 border-b border-amber-500/30 hover:text-amber-500 transition-colors"
+                      onClick={toggleMobileMenu}
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

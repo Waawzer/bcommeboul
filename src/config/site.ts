@@ -1,6 +1,6 @@
 export const siteConfig = {
   // Informations générales
-  name: "Pains Bons",
+  name: "Les délices de l'île verte",
   slogan: "L'Art du Pain Traditionnel",
   description: "Boulangerie artisanale depuis 1987",
   
@@ -11,33 +11,33 @@ export const siteConfig = {
   
   // Coordonnées
   address: {
-    street: "12 rue de la Boulangerie",
-    city: "Paris",
-    postalCode: "75001",
+    street: "63 rue Bizanet Grenoble",
+    city: "Grenoble",
+    postalCode: "38000",
     country: "France",
   },
   contact: {
-    phone: "+33 1 23 45 67 89",
-    email: "contact@painsbons.fr",
+    phone: "04-76-42-51-98",
+    email: "contact@lesdélicesdelîleverte.fr",
   },
   
   // Horaires d'ouverture
   openingHours: {
-    weekdays: "7h00 - 19h30",
-    saturday: "7h00 - 20h00",
-    sunday: "7h00 - 13h00",
+    weekdays: "6h30 - 19h00",
+    saturday: "6h30 - 19h00",
+    sunday: "6h30 - 19h00",
     holidays: "Fermé",
   },
   
   // Réseaux sociaux
   social: {
-    facebook: "https://facebook.com/painsbons",
-    instagram: "https://instagram.com/painsbons",
+    facebook: "https://www.facebook.com/profile.php?id=100057115793654",
+    instagram: "https://www.instagram.com/lesdelicesdelileverte",
   },
   
   // SEO
   seo: {
-    title: "Pains Bons - Boulangerie Artisanale à Paris",
+    title: "les delices de l'île verte - Boulangerie Artisanale à Grenoble",
     description: "Découvrez notre sélection de pains et pâtisseries faits maison selon les traditions boulangères françaises.",
     keywords: ["boulangerie", "pain", "artisanal", "paris", "pâtisserie", "tradition", "fait maison"],
   }
