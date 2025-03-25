@@ -106,8 +106,13 @@ const Header = () => {
 
       {/* Menu mobile */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/95">
-          <div className="container mx-auto px-6">
+        <div 
+          className={`fixed inset-0 z-40 md:hidden ${
+            theme === 'dark' ? 'bg-black/95' : 'bg-gray-900/95'
+          }`}
+        >
+          <div className="relative h-full">
+            {/* Bouton fermeture */}
             <button 
               className="absolute top-5 right-5 text-amber-500 p-2" 
               onClick={toggleMobileMenu}
@@ -118,30 +123,43 @@ const Header = () => {
               </svg>
             </button>
 
-            <div className="flex flex-col items-center">
-              <div className="mb-10 flex justify-center">
-                <Image 
-                  src="/logo.png" 
-                  alt={siteConfig.name} 
-                  width={80} 
-                  height={80}
-                  className="opacity-90"
-                />
+            {/* Logo et navigation */}
+            <div className="pt-20 pb-8 flex flex-col items-center h-full justify-between">
+              <div className="w-full flex flex-col items-center">
+                <div className="mb-10">
+                  <Image 
+                    src="/logo.png" 
+                    alt={siteConfig.name} 
+                    width={80} 
+                    height={80}
+                    className="object-contain"
+                  />
+                </div>
+
+                <nav className="w-full max-w-sm">
+                  <ul className="space-y-5 px-6">
+                    {['Notre Histoire', 'Galerie', 'Contact'].map((item) => (
+                      <li key={item}>
+                        <Link 
+                          href={`#${item.toLowerCase().replace(' ', '-')}`}
+                          className="text-white text-2xl font-medium block py-3 border-b border-amber-500/30 hover:text-amber-500 transition-colors"
+                          onClick={toggleMobileMenu}
+                        >
+                          {item}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               </div>
 
-              <ul className="w-full max-w-xs space-y-6">
-                {['Notre Histoire', 'Galerie', 'Contact'].map((item) => (
-                  <li key={item} className="w-full text-center">
-                    <Link 
-                      href={`#${item.toLowerCase().replace(' ', '-')}`}
-                      className="text-white text-2xl font-medium block py-4 border-b border-amber-500/30 hover:text-amber-500 transition-colors"
-                      onClick={toggleMobileMenu}
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {/* Theme toggle dans menu mobile */}
+              <div className="px-6 pt-6 w-full flex justify-center">
+                <div className="flex items-center space-x-2 text-white">
+                  <span>Thème:</span>
+                  <ThemeToggle />
+                </div>
+              </div>
             </div>
           </div>
         </div>
